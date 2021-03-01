@@ -16,7 +16,6 @@ db.once("open", () => {
 });
 // ================================
 
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -28,7 +27,6 @@ app.get("/campground", async (req, res) => {
     await camp.save();
     res.send(camp);
 });
-
 
 app.listen(3000, () => {
     console.log("Connected to port 3000");
