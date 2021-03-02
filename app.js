@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const methodOverride = require("method-override");
 const app = express();
 const Campground = require("./models/campground");
 //=====DATABASE CONNECTION=====
@@ -20,6 +21,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({extended: true})); // parses incoming requests with urlencoded payloads
+app.use(methodOverride("_method")); // for PUT request
 
 app.get("/", (req, res) => {
     res.render("home");
@@ -39,12 +41,30 @@ app.post("/campgrounds", async (req, res) => {
     const campground = new Campground(req.body.campground); //adding to model
     await campground.save();
     res.redirect(`campgrounds/${campground._id}`); //redirects to created campground
- })
+ });
 //=====Campgrounds show page, shows individual campground=====
 app.get("/campgrounds/:id", async (req,res) => {
     const campground = await Campground.findById(req.params.id);  // finding corresponding campground's id
     res.render("campgrounds/show", {campground});
 });
+//=====Campgrounds edit page=====
+app.get("/campgrounds/:id/edit", async (req, res) => {
+    const campground = await Campground.findById(req.params.id);  // finding corresponding campground's id
+    res.render("campgrounds/edit", {campground});
+});
+//=====Campgrounds update=====
+app.put("/campgrounds/:id", async(req,res) => {
+    const {id} = req.params;
+    const campground = await Campground.findByIdAndUpdate(id, {...req.body.campground});
+    res.redirect(`/campgrounds/${campground._id}`); //redirects to updated campground
+});
+//=====Campgrounds delete=====
+app.delete("/campgrounds/:id", async (req, res) => {
+    const {id} = req.params;
+    const campground = await Campground.findByIdAndDelete(id);
+    res.redirect("/campgrounds");
+});
+
 
 
 

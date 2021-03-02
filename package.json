@@ -1,0 +1,31 @@
+{
+  "name": "yelpcamp_application",
+  "version": "1.0.0",
+  "description": "Website where users can create and review posts. In order to review or create a post, you must have an account. \r This project was created using Node.js, Express, MongoDB, and Bootstrap. Passport.js was used to handle authentication.",
+  "main": "app.js",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.11.18"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mtzern/YelpCamp_application.git"
+  },
+  "keywords": [
+    "yelpcamp_blog",
+    "node.js",
+    "express.js"
+  ],
+  "author": "mtzern",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mtzern/YelpCamp_application/issues"
+  },
+  "homepage": "https://github.com/mtzern/YelpCamp_application#readme"
+}
