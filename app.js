@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
+const ejsMate = require("ejs-mate"); // npm package for layout
 const methodOverride = require("method-override");
 const app = express();
 const Campground = require("./models/campground");
@@ -17,6 +18,7 @@ db.once("open", () => {
 });
 // ================================
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -64,8 +66,6 @@ app.delete("/campgrounds/:id", async (req, res) => {
     const campground = await Campground.findByIdAndDelete(id);
     res.redirect("/campgrounds");
 });
-
-
 
 
 app.listen(3000, () => {
